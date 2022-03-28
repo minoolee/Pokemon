@@ -6,7 +6,6 @@ this.magic = magic
 
    }
 }
-
 class Pokemon{
    alive = true
    constructor(name, health, magic,skills = []){
@@ -19,7 +18,7 @@ class Pokemon{
      return this.skills.push(wert)
    }
    showStatus (){
-console.log(`Magic = ${this.magic} left, and Health = ${this.health}`);
+console.log(`Magic : ${this.magic} left, and Health : ${this.health}`);
    }
    attack (skill,target){
 console.log(skill,target);
@@ -66,13 +65,14 @@ console.log(skill,target);
       this.soldier = this.soldier ? this.soldier : soldiers
     return this.soldier.push(...params) 
    }
-   
-  /*   soldierAttack() {
-      const sold = this.soldier.forEach((v,i,a) => {
-       return `${i},is ${v} in Team ${a}`
-      })
-     setInterval(this.soldierAttack,500)
-   } */ 
+   callSoldiers (name){
+      setTimeout(() => {
+    this.soldier.forEach((value, index, array) => {
+      console.log(`${index+1},${value.name} ist ready to fight ◯~✹`)
+   })
+      }, 5000);
+      setTimeout( this.addSoldier,5000);
+   }
 
  healthyCheck (symptom){
 if (symptom === 'High fever'){
@@ -128,19 +128,26 @@ class Soldier extends Pokemon {
 
 let minoo = new Pokemon ('Minoo',90,50)
 let dimdim = new Pokemon ('Dimdim',100,70)
-/* console.log(minoo); */
+
 let burn = new AttackSkill('Burn', 50, 40)
 let lightning = new AttackSkill('Lightning',60,70)
 let discoDancer = new AttackSkill ('DiscoDancer', 80,30)
 let crazy = new AttackSkill ('Crazy',40,10)
 let love = new AttackSkill('Love',99,80)
+let chimchim = new Soldier ('Chimchim',90,70,[],'Sweet')
+let loli = new Soldier ('Loli',95,76,[],'The Best Mother')
+let koko = new Soldier('Koko',89,67,[],'Crazy hacker')
+let bobi = new Soldier ('Bobi',91,85,[],'Nice Pokemon')
+let cici = new Soldier ('Cici',92,90,[],'Cute Pokemon')
+let lolo = new Soldier ('Lolo',95,76,[],'The Best cook')
+let kiki = new Soldier('Kiki',89,67,[],'Crazy teacher')
+let bobo = new Soldier ('Bobo',91,85,[],'Feet Pokemon')
+let coco = new Soldier ('Coco',92,90,[],'Giber Pokemon')
 /* console.log(burn); */
 minoo.learnAttackSkill(burn)
 dimdim.learnAttackSkill(lightning)
 minoo.learnAttackSkill(crazy)
 dimdim.learnAttackSkill(discoDancer)
-//console.log(minoo);
-//console.log(dimdim);
  minoo.showStatus();
  minoo.attack(burn,dimdim) 
 console.log(minoo.attack(burn,dimdim) );
@@ -154,13 +161,8 @@ minoo.magicUpdate = minoo.health
 console.log(minoo);
 dimdim.magicUpdate = dimdim.magic
 console.log(dimdim);
-// children
-let chimchim = new Soldier ('Chimchim',90,70,[],'Sweet')
-let loli = new Soldier ('Loli',95,76,[],'The Best Mother')
-let koko = new Soldier('Koko',89,67,[],'Crazy hacker')
-let bobi = new Soldier ('Bobi',91,85,[],'Nice Pokemon')
-let cici = new Soldier ('Cici',92,90,[],'Cute Pokemon')
 minoo.addSoldier(chimchim,loli,koko,bobi,cici)
+dimdim.addSoldier(lolo,kiki,bobo,coco)
 console.log(minoo.theWinner(dimdim));
 console.log(minoo);
 console.log(dimdim);
@@ -171,4 +173,7 @@ dimdim.healthyCheck('High fever');
 console.log(dimdim);
 minoo.healthyCheck('Wounded')
 console.log(minoo);
+minoo.callSoldiers()
+dimdim.callSoldiers()
+dimdim.showStatus()
 
